@@ -4,30 +4,19 @@ const { isLoggedIn } = require("../middlewares");
 
 const router = express.Router();
 
-// Route to get all activities
-router.get("/:tripID", (req, res, next) => {
-  Country.find({ _trip: req.params.tripID })
-    // .populate('__creator')
-    // .populate({ path: "__creator", select: "username" })
-    .then(activieties => {
-      res.json(activieties);
-    })
-    .catch(err => next(err));
-});
-
 // Route to add an activity
 router.post("/:tripID", isLoggedIn, (req, res, next) => {
   // let _creator = req.user._id;
   let _trip = req.params.tripID;
-  let { comment, date } = req.body;
+  let { comment, name } = req.body;
   Activity.create({
     name,
-    icon,
-    rating,
-    website,
-    location,
+    // icon,
+    // rating,
+    // website,
+    // location,
     comment,
-    date,
+    // date,
     // _creator,
     _trip
   })
@@ -55,7 +44,7 @@ router.delete("/:activityID", isLoggedIn, (req, res, next) => {
     });
 });
 
-router.put("/:activityID", isLoggedIn, (req, res, next) => {
+router.patch("/:activityID", isLoggedIn, (req, res, next) => {
   Activity.findByIdAndUpdate(req.params.activityID, {
     comment: req.body.comment,
     date: req.body.date

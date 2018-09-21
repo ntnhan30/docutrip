@@ -7,7 +7,7 @@ const tripSchema = new Schema({
     required: [true, "The trip name is required"],
     minlength: 1
   },
-  _user: {
+  _creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   }

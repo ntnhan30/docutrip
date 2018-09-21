@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import Countries from './pages/Countries';
-import AddCountry from './pages/AddCountry';
-import Secret from './pages/Secret';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
-import api from '../api';
-import logo from '../logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Link, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import AddTrip from "./pages/AddTrip";
+import TripPage from "./pages/TripPage";
+import TestingApi from "./pages/TestingApi";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
+import api from "../api";
+import logo from "../logo.svg";
+import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      countries: []
-    }
-    // api.loadUser();
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+
+  //   };
+  // }
 
   handleLogoutClick(e) {
-    api.logout()
+    api.logout();
   }
 
   render() {
@@ -29,24 +28,26 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React Countries</h1>
           <Link to="/">Home</Link>
-          <Link to="/countries">Countries</Link>
-          {api.isLoggedIn() && <Link to="/add-country">Add country</Link>}
+          {api.isLoggedIn() && <Link to="/add-trip">Add trip</Link>}
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
           {!api.isLoggedIn() && <Link to="/login">Login</Link>}
           {api.isLoggedIn() && <Link to="/profile">Profile</Link>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-          <Link to="/secret">Secret</Link>
+          {api.isLoggedIn() && <Link to="/testing-api">Testing</Link>}
+          {api.isLoggedIn() && (
+            <Link to="/" onClick={e => this.handleLogoutClick(e)}>
+              Logout
+            </Link>
+          )}
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/countries" component={Countries} />
-          <Route path="/add-country" component={AddCountry} />
+          <Route path="/add-trip" component={AddTrip} />
+          <Route path="/testing-api" component={TestingApi} />
+          <Route path="/trip/:id" exact component={TripPage} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
-          <Route path="/secret" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

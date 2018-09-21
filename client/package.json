@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "google-places-web": "^0.1.8",
+    "react": "^16.5.1",
     "react-dom": "^16.5.1",
+    "react-google-maps-loader": "^4.2.3",
+    "react-google-places-suggest": "^3.5.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
-    "react": "^16.5.1"
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",

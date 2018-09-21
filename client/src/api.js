@@ -1,7 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "/api"
+      : "http://localhost:5000/api",
   withCredentials: true
 });
 
@@ -13,59 +16,64 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getCountries() {
+  postTrip(data) {
     return service
-      .get('/countries')
+      .post("/trips/add", data)
       .then(res => res.data)
       .catch(errHandler);
   },
 
-  postCountries(data) {
+  gettrips() {
     return service
-      .post('/countries', data)
+      .get("/trips")
       .then(res => res.data)
       .catch(errHandler);
   },
 
-  deleteCountry(id) {
+  gettrip(id) {
     return service
-      .delete('/countries/' + id)
+      .get(`/trips/${id}`)
       .then(res => res.data)
       .catch(errHandler);
   },
 
-  getSecret() {
+  postActivity(id, data) {
     return service
-      .get('/secret')
+      .post(`/activities/${id}`, data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  getActivities(id) {
+    return service
+      .get(`/trips/${id}/activities`)
       .then(res => res.data)
       .catch(errHandler);
   },
 
   signup(userInfo) {
     return service
-      .post('/signup', userInfo)
+      .post("/signup", userInfo)
       .then(res => res.data)
       .catch(errHandler);
   },
 
   login(username, password) {
     return service
-      .post('/login', {
+      .post("/login", {
         username,
-        password,
+        password
       })
       .then(res => {
-        localStorage.setItem('user', JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data));
         return res.data;
       })
       .catch(errHandler);
   },
 
   logout() {
-    localStorage.removeItem('user');
-    return service
-      .get('/logout')
-      .then(res => { })
+    localStorage.removeItem("user");
+    return service.get("/logout").then(res => {});
   },
 
   // loadUser() {
@@ -80,24 +88,21 @@ export default {
   // },
 
   isLoggedIn() {
-    return localStorage.getItem('user') != null
+    return localStorage.getItem("user") != null;
   },
 
   getProfile() {
-    return service
-      .get('/profile')
-      .then(res => res.data)
+    return service.get("/profile").then(res => res.data);
   },
-
 
   addPicture(file) {
     const formData = new FormData();
-    formData.append("picture", file)
+    formData.append("picture", file);
     return service
-      .post('/users/first-user/pictures', formData, {
+      .post("/users/first-user/pictures", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+          "Content-Type": "multipart/form-data"
+        }
       })
       .then(res => res.data)
       .catch(errHandler);
@@ -105,14 +110,14 @@ export default {
 
   addProfilePicture(file) {
     const formData = new FormData();
-    formData.append("picture", file)
+    formData.append("picture", file);
     return service
-      .patch('/profile/picture', formData, {
+      .patch("/profile/picture", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+          "Content-Type": "multipart/form-data"
+        }
       })
       .then(res => res.data)
       .catch(errHandler);
-  },
+  }
 };

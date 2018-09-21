@@ -23,7 +23,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5000",
+    origin: "http://localhost:3000",
     optionsSuccessStatus: 200,
     credentials: true
   })
@@ -52,7 +52,8 @@ require("./passport")(app);
 
 app.use("/api", require("./routes/index"));
 app.use("/api", require("./routes/auth"));
-app.use("/api/countries", require("./routes/countries"));
+app.use("/api/activities", require("./routes/activities"));
+app.use("/api/trips", require("./routes/trips"));
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use("/api/*", (req, res, next) => {
