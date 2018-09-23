@@ -6,6 +6,7 @@ const activitySchema = new Schema({
     type: String,
     default: ""
   },
+  placeID: String,
   name: String,
   icon: String,
   rating: Number,

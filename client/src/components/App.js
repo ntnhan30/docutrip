@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import AddTrip from "./pages/AddTrip";
 import TripPage from "./pages/TripPage";
 import TestingApi from "./pages/TestingApi";
+import TestPlaceDetails from "./pages/TestPlaceDetails";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
@@ -34,6 +35,9 @@ class App extends Component {
           {!api.isLoggedIn() && <Link to="/login">Login</Link>}
           {api.isLoggedIn() && <Link to="/profile">Profile</Link>}
           {api.isLoggedIn() && <Link to="/testing-api">Testing</Link>}
+          {api.isLoggedIn() && (
+            <Link to="/testing-placedetail">Testing-Place-Details</Link>
+          )}
           {api.isLoggedIn() && (
             <Link to="/" onClick={e => this.handleLogoutClick(e)}>
               Logout

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GoogleMapLoader from "react-google-maps-loader";
 import GooglePlacesSuggest from "react-google-places-suggest";
 
+// Try to put it in .env file
 const MY_API_KEY = "AIzaSyCUUD_nI-yWZrq9Df4H3f9x3kbrDUAclLo";
 
 export default class TestingApi extends React.Component {

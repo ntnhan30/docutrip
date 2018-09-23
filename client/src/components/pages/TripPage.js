@@ -46,4 +46,5 @@ class TripPage extends Component {
     });
   }
 }
+
 export default TripPage;
