@@ -24,7 +24,12 @@ class TripPage extends Component {
           {this.state.activities &&
             this.state.activities.map(a => (
               <li key={a._id}>
-                {a.comment} {a.name}
+                {a.comment} <br />
+                {a.name}
+                {a.website} <br />
+                {a.icon} <br />
+                {a.rating} <br />
+                {a.location}
               </li>
             ))}
         </div>

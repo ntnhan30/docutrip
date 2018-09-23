@@ -3,41 +3,50 @@ const axios = require("axios");
 const Activity = require("../models/Activity");
 const { isLoggedIn } = require("../middlewares");
 const router = express.Router();
+const API_KEY = process.env.API_KEY;
 
 // Route to add an activity
 router.post("/:tripID", isLoggedIn, (req, res, next) => {
+  // let _creator = req.user._id;
   let _trip = req.params.tripID;
-  let { comment, name, placeID } = req.body;
+  let { comment, placeID } = req.body;
   axios({
     method: "get",
-    url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&key=AIzaSyCUUD_nI-yWZrq9Df4H3f9x3kbrDUAclLo`
+    url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&key=${API_KEY}`
     // params: "URL parameters to be sent with the request"
   })
     .then(response => {
-      console.log(response);
-    })
-    .catch(err => {
-      //Here we catch the error and display it
-    });
-  // let _creator = req.user._id;
-
-  Activity.create({
-    placeID,
-    name,
-    // icon,
-    // rating,
-    // website,
-    // location,
-    comment,
-    // date,
-    // _creator,
-    _trip
-  })
-    .then(activity => {
-      res.json({
-        success: true,
-        activity
-      });
+      // console.log(
+      //   "DEBUG RESPONE",
+      //   response.data.result.name,
+      //   "DEBUG ICON",
+      //   response.data.result.icon,
+      //   "DEBUG RATING",
+      //   response.data.result.rating,
+      //   "DEBUG WEB",
+      //   response.data.result.website,
+      //   "DEBUG LOCATION",
+      //   response.data.result.url
+      // );
+      Activity.create({
+        // placeID,
+        name: response.data.result.name,
+        icon: response.data.result.icon,
+        rating: response.data.result.rating,
+        website: response.data.result.website,
+        location: response.data.result.url,
+        comment,
+        // date,
+        // _creator,
+        _trip
+      })
+        .then(activity => {
+          res.json({
+            success: true,
+            activity
+          });
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
