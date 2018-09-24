@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import api from "../../api";
 import { Link, Route } from "react-router-dom";
+import { Button } from "reactstrap";
+import AddTrip from "./AddTrip";
 
 class Profile extends Component {
   constructor(props) {
@@ -28,6 +30,29 @@ class Profile extends Component {
       }
     });
   }
+  // delete button
+  handleClick(e, t) {
+    e.preventDefault();
+    let id = t._id;
+    // console.log("DEBUG  ID", a);
+    api
+      .deleteTrip(id)
+      .then(result => {
+        console.log("SUCCESS!");
+        this.setState({
+          comment: "",
+          message: `Your Trip has been deleted`
+        });
+        setTimeout(() => {
+          this.setState({
+            message: null
+          });
+        }, 2000);
+      })
+      .catch(err => {
+        console.log("ERROR");
+      });
+  }
   render() {
     return (
       <div className="ProfileInfo">
@@ -49,13 +74,17 @@ class Profile extends Component {
           <br />
         </div>
         <div className="alltrips">
+          <AddTrip />
           <h1>Trips</h1>
           {this.state.trips &&
             this.state.trips.map(t => (
-              <div>
+              <div key={t._id}>
                 <Link to={"/trip/" + t._id} key={t._id}>
                   {t.name}
                 </Link>
+                <div className="tripDelete">
+                  <Button onClick={e => this.handleClick(e, t)}>Delete</Button>
+                </div>
               </div>
             ))}
         </div>

@@ -62,6 +62,7 @@ class AddActivity extends Component {
       .postActivity(id, data)
       .then(result => {
         console.log("SUCCESS!");
+        this.props.onAddActivity();
         this.setState({
           comment: "",
           message: `Your activity '${this.state.comment}' has been created`

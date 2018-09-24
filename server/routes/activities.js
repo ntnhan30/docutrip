@@ -18,15 +18,7 @@ router.post("/:tripID", isLoggedIn, (req, res, next) => {
     .then(response => {
       // console.log(
       //   "DEBUG RESPONE",
-      //   response.data.result.name,
-      //   "DEBUG ICON",
-      //   response.data.result.icon,
-      //   "DEBUG RATING",
-      //   response.data.result.rating,
-      //   "DEBUG WEB",
-      //   response.data.result.website,
-      //   "DEBUG LOCATION",
-      //   response.data.result.url
+      //   response.data.result.photos[0].photo_reference
       // );
       Activity.create({
         // placeID,
@@ -36,6 +28,9 @@ router.post("/:tripID", isLoggedIn, (req, res, next) => {
         website: response.data.result.website,
         location: response.data.result.url,
         comment,
+        photoUrl: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${
+          response.data.result.photos[0].photo_reference
+        }&key=${API_KEY}`,
         // date,
         // _creator,
         _trip

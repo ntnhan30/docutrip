@@ -23,6 +23,13 @@ export default {
       .catch(errHandler);
   },
 
+  deleteTrip(id) {
+    return service
+      .delete(`/trips/${id}`)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
   gettrips() {
     return service
       .get("/trips")
@@ -40,6 +47,13 @@ export default {
   postActivity(id, data) {
     return service
       .post(`/activities/${id}`, data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  deleteActivity(id) {
+    return service
+      .delete(`/activities/${id}`)
       .then(res => res.data)
       .catch(errHandler);
   },
