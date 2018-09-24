@@ -20,17 +20,18 @@ class TripPage extends Component {
     super(props);
     this.state = {
       trip: null,
-      activities: null
+      activities: [],
+      loading: true
     };
+    this.updateActivities = this.updateActivities.bind(this);
   }
 
-  updateActivities() {
-    let id = this.props.match.params.id;
-    api.getActivities(id).then(activities => {
-      console.log("activities", activities);
-      this.setState({
-        activities: this.state.activities
-      });
+  updateActivities(result) {
+    // e.preventDefault();
+    console.log("This is triggered");
+    console.log("RESULT IN TRIPAGE -->", result);
+    this.setState({
+      activities: [...this.state.activities, result]
     });
   }
 
@@ -41,8 +42,10 @@ class TripPage extends Component {
         (activity, i) => i !== indexToRemove
       )
     });
+    let id = a._id;
+    // console.log("DEBUG  ID", a);
     api
-      .deleteActivity(a._id)
+      .deleteActivity(id)
       .then(result => {
         console.log("SUCCESS!");
         this.setState({
@@ -59,8 +62,10 @@ class TripPage extends Component {
         console.log("ERROR");
       });
   }
-
   render() {
+    if (this.state.loading) {
+      return <div>loading....</div>;
+    }
     return (
       <div>
         <div>
@@ -72,39 +77,38 @@ class TripPage extends Component {
         </div>
         <div>
           <h1>List of activities</h1>
-          {this.state.activities &&
-            this.state.activities.map((a, i) => (
-              <Row key={i}>
-                <Col sm="3" md="5">
-                  <Card>
-                    <CardTitle>{a.name}</CardTitle>
-                    <CardSubtitle>Rating: {a.rating}</CardSubtitle>
-                    <CardImg
-                      top
-                      width="100%"
-                      src={a.photoUrl}
-                      alt="Card image cap"
-                    />
-                    <CardBody>
-                      <CardLink href={a.website}>Home page</CardLink>
-                      <CardLink href={a.location}>Location</CardLink>
-                      <CardText>{a.comment}</CardText>
-                      <Button
-                        onClick={e => {
-                          this.handleDelete(e, a, i);
-                          {
-                            /* this.updateActivities(); */
-                          }
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </CardBody>
-                  </Card>
-                </Col>
-              </Row>
-              //{a.icon}
-            ))}
+          {this.state.activities.map((a, i) => (
+            <Row key={i}>
+              <Col sm="3" md="5">
+                <Card>
+                  <CardTitle>{a.name}</CardTitle>
+                  <CardSubtitle>Rating: {a.rating}</CardSubtitle>
+                  <CardImg
+                    top
+                    width="100%"
+                    src={a.photoUrl}
+                    alt="Card image cap"
+                  />
+                  <CardBody>
+                    <CardLink href={a.website}>Home page</CardLink>
+                    <CardLink href={a.location}>Location</CardLink>
+                    <CardText>{a.comment}</CardText>
+                    <Button
+                      onClick={e => {
+                        this.handleDelete(e, a, i);
+                        {
+                          /* this.updateActivities(); */
+                        }
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            //{a.icon}
+          ))}
         </div>
       </div>
     );
@@ -114,7 +118,8 @@ class TripPage extends Component {
     let id = this.props.match.params.id;
     api.gettrip(id).then(trip => {
       this.setState({
-        trip: trip
+        trip: trip,
+        loading: false
       });
     });
     api.getActivities(id).then(activities => {

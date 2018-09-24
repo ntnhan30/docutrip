@@ -11,6 +11,7 @@ class AddActivity extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activities: null,
       comment: "",
       // name: ""
       search: "",
@@ -62,7 +63,8 @@ class AddActivity extends Component {
       .postActivity(id, data)
       .then(result => {
         console.log("SUCCESS!");
-        this.props.onAddActivity();
+        console.log("ACTIVITY --->", result);
+        this.props.onAddActivity(result);
         this.setState({
           comment: "",
           message: `Your activity '${this.state.comment}' has been created`
