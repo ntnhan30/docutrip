@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../api";
+import ActivitiesByDate from "./ActivitiesByDate";
 import {
   CardLink,
   Row,
@@ -14,6 +15,18 @@ import {
 } from "reactstrap";
 
 class AllActivities extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // sortByDate Function
+  // sortByDate(e) {
+  //   console.log("DEBUG THIS IS TRIGGERED", e.target.value);
+  //   let x = this.props.activities.filter(
+  //     a => a.date.toString().substring(0, 10) === e.target.value
+  //   );
+  //   console.log("Activities", x);
+  // }
   // delete button
   handleDelete(e, a, i) {
     e.preventDefault();
@@ -33,11 +46,19 @@ class AllActivities extends Component {
     return (
       <div>
         <h1>List of activities</h1>
+        <ActivitiesByDate
+          activities={this.props.activities}
+          // onHandleChange={e => this.sortByDate(e)}
+          onHandleChange={e => this.props.sortByDate(e)}
+        />
         <Row>
           {this.props.activities.map((a, i) => (
-            <Col sm="3" md="5" key={i}>
+            <Col sm="6" md="3" key={i}>
               <Card>
                 <CardTitle>{a.name}</CardTitle>
+                <CardSubtitle>
+                  <img src={a.icon} alt="" />
+                </CardSubtitle>
                 <CardSubtitle>Rating: {a.rating}</CardSubtitle>
                 <CardSubtitle>
                   Date: {a.date.toString().substring(0, 10)}
@@ -51,7 +72,7 @@ class AllActivities extends Component {
                 />
                 <CardBody>
                   <CardLink href={a.website} target="_blank">
-                    Home page
+                    Website
                   </CardLink>
                   <CardLink href={a.location} target="_blank">
                     Location
@@ -70,7 +91,6 @@ class AllActivities extends Component {
                 </CardBody>
               </Card>
             </Col>
-            //{a.icon}
           ))}
         </Row>
       </div>

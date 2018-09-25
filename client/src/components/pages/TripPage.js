@@ -12,6 +12,17 @@ class TripPage extends Component {
     };
     this.updateActivities = this.updateActivities.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.sortByDateHandel = this.sortByDateHandel.bind(this);
+  }
+
+  sortByDateHandel(e) {
+    console.log("DEBUG THIS IS TRIGGERED", e.target.value);
+    this.setState({
+      activities: this.state.activities.filter(
+        a => a.date.toString().substring(0, 10) === e.target.value
+      )
+    });
+    // console.log("Activities", activities);
   }
 
   updateActivities(result) {
@@ -42,6 +53,7 @@ class TripPage extends Component {
         <AllActivities
           activities={this.state.activities}
           onDeleteActivity={i => this.handleDelete(i)}
+          sortByDate={e => this.sortByDateHandel(e)}
         />
       </div>
     );
