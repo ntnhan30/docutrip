@@ -3,8 +3,6 @@ import { Route, Link, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import AddTrip from "./pages/AddTrip";
 import TripPage from "./pages/TripPage";
-import TestingApi from "./pages/TestingApi";
-// import TestPlaceDetails from "./pages/TestPlaceDetails";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
@@ -29,15 +27,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Link to="/">Home</Link>
+          {/* <Link to="/">Home</Link> */}
           {/* {api.isLoggedIn() && <Link to="/add-trip">Add trip</Link>} */}
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
           {!api.isLoggedIn() && <Link to="/login">Login</Link>}
           {api.isLoggedIn() && <Link to="/profile">Profile</Link>}
-          {/* {api.isLoggedIn() && <Link to="/testing-api">Testing</Link>} */}
-          {/* {api.isLoggedIn() && (
-            <Link to="/testing-placedetail">Testing-Place-Details</Link>
-          )} */}
           {api.isLoggedIn() && (
             <Link to="/" onClick={e => this.handleLogoutClick(e)}>
               Logout
@@ -47,7 +41,6 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/add-trip" component={AddTrip} />
-          <Route path="/testing-api" component={TestingApi} />
           <Route path="/trip/:id" exact component={TripPage} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />

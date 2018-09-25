@@ -4,12 +4,6 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class AllTrips extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      trips: null
-    };
-  }
   // delete button
   handleClick(e, t, i) {
     e.preventDefault();
@@ -41,13 +35,6 @@ class AllTrips extends Component {
       </div>
     );
   }
-  // componentDidMount() {
-  //   api.gettrips().then(trips => {
-  //     this.setState({
-  //       trips: trips
-  //     });
-  //   });
-  // }
 }
 
 export default AllTrips;

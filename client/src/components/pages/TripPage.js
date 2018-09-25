@@ -1,19 +1,7 @@
 import React, { Component } from "react";
 import api from "../../api";
 import AddActivity from "./AddActivity";
-import {
-  CardLink,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button
-} from "reactstrap";
-// import { Link, Route } from "react-router-dom";
+import AllActivities from "./AllActivities";
 
 class TripPage extends Component {
   constructor(props) {
@@ -23,6 +11,7 @@ class TripPage extends Component {
       activities: []
     };
     this.updateActivities = this.updateActivities.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   updateActivities(result) {
@@ -32,24 +21,14 @@ class TripPage extends Component {
     });
   }
 
-  handleDelete(e, a, indexToRemove) {
-    e.preventDefault();
+  handleDelete(index) {
+    // console.log("i FROM PROFILE", index);
+    // e.preventDefault();
     this.setState({
-      activities: this.state.activities.filter(
-        (activity, i) => i !== indexToRemove
-      )
+      activities: this.state.activities.filter((activities, i) => i !== index)
     });
-    let id = a._id;
-    // console.log("DEBUG  ID", a);
-    api
-      .deleteActivity(id)
-      .then(result => {
-        console.log("SUCCESS!");
-      })
-      .catch(err => {
-        console.log("ERROR");
-      });
   }
+
   render() {
     return (
       <div>
@@ -60,45 +39,10 @@ class TripPage extends Component {
             onAddActivity={this.updateActivities}
           />
         </div>
-        <div>
-          <h1>List of activities</h1>
-          <Row>
-            {this.state.activities.map((a, i) => (
-              <Col sm="3" md="5" key={i}>
-                <Card>
-                  <CardTitle>{a.name}</CardTitle>
-                  <CardSubtitle>Rating: {a.rating}</CardSubtitle>
-                  <CardImg
-                    top
-                    width="100%"
-                    src={a.photoUrl}
-                    alt="Card image cap"
-                  />
-                  <CardBody>
-                    <CardLink href={a.website} target="_blank">
-                      Home page
-                    </CardLink>
-                    <CardLink href={a.location} target="_blank">
-                      Location
-                    </CardLink>
-                    <CardText>{a.comment}</CardText>
-                    <Button
-                      onClick={e => {
-                        this.handleDelete(e, a, i);
-                        {
-                          /* this.updateActivities(); */
-                        }
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </CardBody>
-                </Card>
-              </Col>
-              //{a.icon}
-            ))}
-          </Row>
-        </div>
+        <AllActivities
+          activities={this.state.activities}
+          onDeleteActivity={i => this.handleDelete(i)}
+        />
       </div>
     );
   }
