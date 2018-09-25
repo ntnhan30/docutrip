@@ -39,6 +39,10 @@ class AllActivities extends Component {
               <Card>
                 <CardTitle>{a.name}</CardTitle>
                 <CardSubtitle>Rating: {a.rating}</CardSubtitle>
+                <CardSubtitle>
+                  Date: {a.date.toString().substring(0, 10)}
+                  {/* Date: {a.date} */}
+                </CardSubtitle>
                 <CardImg
                   top
                   width="100%"

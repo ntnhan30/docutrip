@@ -12,6 +12,7 @@ class AddActivity extends Component {
     this.state = {
       activities: null,
       comment: "",
+      date: new Date(),
       search: "",
       value: "",
       placeID: ""
@@ -51,7 +52,8 @@ class AddActivity extends Component {
     let id = this.props.id;
     let data = {
       comment: this.state.comment,
-      placeID: this.state.placeID
+      placeID: this.state.placeID,
+      date: this.state.date
     };
     // console.log("DEBUG PLACE ID", data);
 
@@ -113,6 +115,15 @@ class AddActivity extends Component {
             value={this.state.comment}
             onChange={e => {
               this.handleInputChange("comment", e);
+            }}
+          />{" "}
+          <br />
+          Date:{" "}
+          <input
+            type="date"
+            value={this.state.date}
+            onChange={e => {
+              this.handleInputChange("date", e);
             }}
           />{" "}
           <br />

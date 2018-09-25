@@ -9,7 +9,7 @@ const API_KEY = process.env.API_KEY;
 router.post("/:tripID", isLoggedIn, (req, res, next) => {
   // let _creator = req.user._id;
   let _trip = req.params.tripID;
-  let { comment, placeID } = req.body;
+  let { comment, placeID, date } = req.body;
   axios({
     method: "get",
     url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&key=${API_KEY}`
@@ -31,7 +31,8 @@ router.post("/:tripID", isLoggedIn, (req, res, next) => {
         photoUrl: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${
           response.data.result.photos[0].photo_reference
         }&key=${API_KEY}`,
-        // date,
+        date,
+
         // _creator,
         _trip
       })

@@ -13,7 +13,9 @@ const activitySchema = new Schema({
   website: String,
   location: String,
   comment: String,
-  date: Date,
+  date: {
+    type: Date
+  },
   _trip: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Trip"
