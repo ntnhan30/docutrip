@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import api from "../../api";
-import { Link, Route } from "react-router-dom";
-import { Button } from "reactstrap";
 import AddTrip from "./AddTrip";
+import AllTrips from "./AllTrips";
 
 class Profile extends Component {
   constructor(props) {
@@ -10,12 +9,14 @@ class Profile extends Component {
     this.state = {
       username: null,
       pictureUrl: null,
-      trips: null
+      trips: []
     };
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   handleChange(e) {
-    console.log("handleChange");
-    console.log("DEBUG e.target.files[0]", e.target.files[0]);
+    // console.log("handleChange");
+    // console.log("DEBUG e.target.files[0]", e.target.files[0]);
     this.setState({
       file: e.target.files[0]
     });
@@ -30,29 +31,22 @@ class Profile extends Component {
       }
     });
   }
-  // delete button
-  handleClick(e, t) {
-    e.preventDefault();
-    let id = t._id;
-    // console.log("DEBUG  ID", a);
-    api
-      .deleteTrip(id)
-      .then(result => {
-        console.log("SUCCESS!");
-        this.setState({
-          comment: "",
-          message: `Your Trip has been deleted`
-        });
-        setTimeout(() => {
-          this.setState({
-            message: null
-          });
-        }, 2000);
-      })
-      .catch(err => {
-        console.log("ERROR");
-      });
+
+  handleDelete(index) {
+    // console.log("i FROM PROFILE", index);
+    // e.preventDefault();
+    this.setState({
+      trips: this.state.trips.filter((trips, i) => i !== index)
+    });
   }
+
+  handleAdd(result) {
+    // console.log("RESULT IN PROFILE -->", result);
+    this.setState({
+      trips: [...this.state.trips, result.trip]
+    });
+  }
+
   render() {
     return (
       <div className="ProfileInfo">
@@ -73,20 +67,13 @@ class Profile extends Component {
           <br />
           <br />
         </div>
-        <div className="alltrips">
-          <AddTrip />
+        <div className="trips">
+          <AddTrip onAddTrip={e => this.handleAdd(e)} />
           <h1>Trips</h1>
-          {this.state.trips &&
-            this.state.trips.map(t => (
-              <div key={t._id}>
-                <Link to={"/trip/" + t._id} key={t._id}>
-                  {t.name}
-                </Link>
-                <div className="tripDelete">
-                  <Button onClick={e => this.handleClick(e, t)}>Delete</Button>
-                </div>
-              </div>
-            ))}
+          <AllTrips
+            trips={this.state.trips}
+            onDeleteTrip={i => this.handleDelete(i)}
+          />
         </div>
       </div>
     );
@@ -105,5 +92,4 @@ class Profile extends Component {
     });
   }
 }
-
 export default Profile;

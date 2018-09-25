@@ -20,18 +20,15 @@ class TripPage extends Component {
     super(props);
     this.state = {
       trip: null,
-      activities: [],
-      loading: true
+      activities: []
     };
     this.updateActivities = this.updateActivities.bind(this);
   }
 
   updateActivities(result) {
-    // e.preventDefault();
-    console.log("This is triggered");
-    console.log("RESULT IN TRIPAGE -->", result);
+    // console.log("RESULT IN TRIPAGE -->", result.activity);
     this.setState({
-      activities: [...this.state.activities, result]
+      activities: [...this.state.activities, result.activity]
     });
   }
 
@@ -48,24 +45,12 @@ class TripPage extends Component {
       .deleteActivity(id)
       .then(result => {
         console.log("SUCCESS!");
-        this.setState({
-          comment: "",
-          message: `Your activity has been deleted`
-        });
-        setTimeout(() => {
-          this.setState({
-            message: null
-          });
-        }, 2000);
       })
       .catch(err => {
         console.log("ERROR");
       });
   }
   render() {
-    if (this.state.loading) {
-      return <div>loading....</div>;
-    }
     return (
       <div>
         <div>
@@ -77,9 +62,9 @@ class TripPage extends Component {
         </div>
         <div>
           <h1>List of activities</h1>
-          {this.state.activities.map((a, i) => (
-            <Row key={i}>
-              <Col sm="3" md="5">
+          <Row>
+            {this.state.activities.map((a, i) => (
+              <Col sm="3" md="5" key={i}>
                 <Card>
                   <CardTitle>{a.name}</CardTitle>
                   <CardSubtitle>Rating: {a.rating}</CardSubtitle>
@@ -90,8 +75,12 @@ class TripPage extends Component {
                     alt="Card image cap"
                   />
                   <CardBody>
-                    <CardLink href={a.website}>Home page</CardLink>
-                    <CardLink href={a.location}>Location</CardLink>
+                    <CardLink href={a.website} target="_blank">
+                      Home page
+                    </CardLink>
+                    <CardLink href={a.location} target="_blank">
+                      Location
+                    </CardLink>
                     <CardText>{a.comment}</CardText>
                     <Button
                       onClick={e => {
@@ -106,9 +95,9 @@ class TripPage extends Component {
                   </CardBody>
                 </Card>
               </Col>
-            </Row>
-            //{a.icon}
-          ))}
+              //{a.icon}
+            ))}
+          </Row>
         </div>
       </div>
     );

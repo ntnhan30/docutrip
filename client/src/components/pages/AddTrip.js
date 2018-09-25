@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from "../../api";
 
 class AddTrip extends Component {
@@ -17,7 +16,6 @@ class AddTrip extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {};
     newState[stateFieldName] = event.target.value;
-
     this.setState(newState);
   }
 
@@ -27,21 +25,11 @@ class AddTrip extends Component {
       name: this.state.name
       // _creator: this.state._creator
     };
-    console.log(data);
     api
       .postTrip(data)
       .then(result => {
         console.log("SUCCESS!");
-        this.setState({
-          name: "",
-          // _creator: "",
-          message: `Your trip '${this.state.name}' has been created`
-        });
-        setTimeout(() => {
-          this.setState({
-            message: null
-          });
-        }, 2000);
+        this.props.onAddTrip(result);
       })
       .catch(err => {
         console.log("ERROR");
@@ -62,15 +50,6 @@ class AddTrip extends Component {
           />{" "}
           <button onClick={e => this.handleClick(e)}>Create trip</button>
         </form>
-        <div
-          style={{
-            margin: 10,
-            backgroundColor: "red",
-            display: this.state.message ? "block" : "none"
-          }}
-        >
-          {this.state.message}
-        </div>
       </div>
     );
   }

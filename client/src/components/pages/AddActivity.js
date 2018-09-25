@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from "../../api";
 import GoogleMapLoader from "react-google-maps-loader";
 import GooglePlacesSuggest from "react-google-places-suggest";
@@ -13,7 +12,6 @@ class AddActivity extends Component {
     this.state = {
       activities: null,
       comment: "",
-      // name: ""
       search: "",
       value: "",
       placeID: ""
@@ -26,7 +24,6 @@ class AddActivity extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {};
     newState[stateFieldName] = event.target.value;
-
     this.setState(newState);
   }
 
@@ -55,25 +52,14 @@ class AddActivity extends Component {
     let data = {
       comment: this.state.comment,
       placeID: this.state.placeID
-      // name: this.state.name
     };
-    console.log("DEBUG PLACE ID", data);
+    // console.log("DEBUG PLACE ID", data);
 
     api
       .postActivity(id, data)
       .then(result => {
-        console.log("SUCCESS!");
-        console.log("ACTIVITY --->", result);
+        // console.log("ACTIVITY --->", result);
         this.props.onAddActivity(result);
-        this.setState({
-          comment: "",
-          message: `Your activity '${this.state.comment}' has been created`
-        });
-        setTimeout(() => {
-          this.setState({
-            message: null
-          });
-        }, 2000);
       })
       .catch(err => {
         console.log("ERROR");
@@ -130,28 +116,10 @@ class AddActivity extends Component {
             }}
           />{" "}
           <br />
-          {/* Name:{" "}
-          <input
-            type="text"
-            value={this.state.name}
-            onChange={e => {
-              this.handleInputChange("name", e);
-            }}
-          />{" "} */}
           <button onClick={e => this.handleClick(e)}>Create activity</button>
         </form>
-        <div
-          style={{
-            margin: 10,
-            backgroundColor: "red",
-            display: this.state.message ? "block" : "none"
-          }}
-        >
-          {this.state.message}
-        </div>
       </div>
     );
   }
 }
-
 export default AddActivity;
