@@ -8,21 +8,18 @@ class TripPage extends Component {
     super(props);
     this.state = {
       trip: null,
-      activities: []
+      activities: [],
+      chosenDate: ""
     };
     this.updateActivities = this.updateActivities.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.sortByDateHandel = this.sortByDateHandel.bind(this);
   }
-
   sortByDateHandel(e) {
     console.log("DEBUG THIS IS TRIGGERED", e.target.value);
     this.setState({
-      activities: this.state.activities.filter(
-        a => a.date.toString().substring(0, 10) === e.target.value
-      )
+      chosenDate: e.target.value
     });
-    // console.log("Activities", activities);
   }
 
   updateActivities(result) {
@@ -52,6 +49,7 @@ class TripPage extends Component {
         </div>
         <AllActivities
           activities={this.state.activities}
+          chosenDate={this.state.chosenDate}
           onDeleteActivity={i => this.handleDelete(i)}
           sortByDate={e => this.sortByDateHandel(e)}
         />

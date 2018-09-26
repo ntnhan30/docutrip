@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 
 class ActivitiesByDate extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   handleChange(e) {
     e.preventDefault();
-    this.props.onHandleChange(e);
+    this.props.onChange(e);
   }
+
   render() {
-    let x = this.props.activities.map(a => a.date);
     return (
       <div>
         <form action="">
           {" "}
           Date
           <select name="date" onChange={e => this.handleChange(e)}>
-            {x
+            <option value="">All</option>
+            {this.props.activities
+              .map(a => a.date.toString().substring(0, 10))
               .filter((elem, pos, arr) => {
-                return arr.indexOf(elem) === pos;
+                return arr.indexOf(elem) == pos;
               })
               .map(a => {
                 return (
