@@ -11,7 +11,8 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button
+  Button,
+  Badge
 } from "reactstrap";
 
 class AllActivities extends Component {
@@ -38,7 +39,6 @@ class AllActivities extends Component {
   render() {
     return (
       <div>
-        <h1>List of activities</h1>
         <ActivitiesByDate
           activities={this.props.activities}
           chosenDate={this.props.chosenDate}
@@ -55,16 +55,17 @@ class AllActivities extends Component {
             )
             .map((a, i) => (
               <Col sm="6" md="3" key={i}>
-                <Card>
+                <Card
+                  style={{ borderWidth: "1px", borderColor: "#87EFC3" }}
+                  className="card"
+                >
                   <CardTitle>{a.name}</CardTitle>
                   <CardSubtitle>
                     <img src={a.icon} alt="" />
                   </CardSubtitle>
-                  <CardSubtitle>Rating: {a.rating}</CardSubtitle>
-                  <CardSubtitle>
+                  {/* <CardSubtitle>
                     Date: {a.date.toString().substring(0, 10)}
-                    {/* Date: {a.date} */}
-                  </CardSubtitle>
+                  </CardSubtitle> */}
                   <CardImg
                     top
                     width="100%"
@@ -72,23 +73,48 @@ class AllActivities extends Component {
                     alt="Card image cap"
                   />
                   <CardBody>
+                    <CardText>
+                      <small className="text-muted">{a.rating}</small>
+                      <img src="/star.svg" className="Star-logo" alt="" />
+                    </CardText>
                     <CardLink href={a.website} target="_blank">
-                      Website
+                      <img
+                        src="/homepage.svg"
+                        className="Location-logo"
+                        alt="Website"
+                      />
                     </CardLink>
                     <CardLink href={a.location} target="_blank">
-                      Location
-                    </CardLink>
-                    <CardText>{a.comment}</CardText>
-                    <Button
+                      <img
+                        src="/location.svg"
+                        className="Location-logo"
+                        alt="Location"
+                      />
+                    </CardLink>{" "}
+                    <CardText style={{ fontFamily: "Indie Flower" }}>
+                      <img
+                        src="/chat.svg"
+                        className="Location-logo"
+                        alt="Comment"
+                      />
+                      " {a.comment}"
+                    </CardText>
+                    <Badge
+                      href="#"
+                      color="light"
                       onClick={e => {
                         this.handleDelete(e, a, i);
-                        {
-                          /* this.updateActivities(); */
-                        }
+                      }}
+                    >
+                      <img src="/DeleteIcon.svg" alt="" />
+                    </Badge>
+                    {/* <Button
+                      onClick={e => {
+                        this.handleDelete(e, a, i);
                       }}
                     >
                       Delete
-                    </Button>
+                    </Button> */}
                   </CardBody>
                 </Card>
               </Col>

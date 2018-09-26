@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../../api";
-import { Button } from "reactstrap";
+import { Button, Badge } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class AllTrips extends Component {
@@ -23,12 +23,20 @@ class AllTrips extends Component {
       <div className="alltrips">
         {this.props.trips &&
           this.props.trips.map((t, i) => (
-            <div key={i}>
-              <Link to={"/trip/" + t._id} key={t._id}>
-                {t.name}
-              </Link>
+            <div>
+              <div key={i} className="trip">
+                <Link to={"/trip/" + t._id} key={t._id}>
+                  {t.name}
+                </Link>
+              </div>
               <div className="tripDelete">
-                <Button onClick={e => this.handleClick(e, t, i)}>Delete</Button>
+                <Badge
+                  href="#"
+                  color="light"
+                  onClick={e => this.handleClick(e, t, i)}
+                >
+                  <img src="/DeleteIcon.svg" alt="" />
+                </Badge>
               </div>
             </div>
           ))}

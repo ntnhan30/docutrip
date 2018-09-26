@@ -15,7 +15,7 @@ class ActivitiesByDate extends Component {
       <div>
         <form action="">
           {" "}
-          Date
+          <img src="/calendar.svg" className="Star-logo" alt="" />
           <select name="date" onChange={e => this.handleChange(e)}>
             <option value="">All</option>
             {this.props.activities

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import api from "../../api";
 import GoogleMapLoader from "react-google-maps-loader";
 import GooglePlacesSuggest from "react-google-places-suggest";
+import { Input, Col, FormGroup, Form } from "reactstrap";
+
 // Try to put it in .env file
 const MY_API_KEY = "AIzaSyCUUD_nI-yWZrq9Df4H3f9x3kbrDUAclLo";
 // const MY_API_KEY = process.env.API_KEY;
@@ -70,65 +72,77 @@ class AddActivity extends Component {
   render() {
     const { search, value } = this.state;
     return (
-      <div className="AddActivity">
-        <h2>Add activity</h2>
-        <form>
-          <GoogleMapLoader
-            params={{
-              key: MY_API_KEY,
-              libraries: "places,geocode"
-            }}
-            render={googleMaps =>
-              googleMaps && (
-                <GooglePlacesSuggest
-                  googleMaps={googleMaps}
-                  autocompletionRequest={{
-                    input: search
-                    // Optional options
-                    // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
-                  }}
-                  // Optional props
-                  onSelectSuggest={this.handleSelectSuggest}
-                  textNoResults="My custom no results text" // null or "" if you want to disable the no results item
-                  customRender={prediction => (
-                    <div className="customWrapper">
-                      {prediction
-                        ? prediction.description
-                        : "My custom no results text"}
-                    </div>
-                  )}
-                >
-                  Place:{" "}
-                  <input
-                    type="text"
-                    value={value}
-                    placeholder="Search a location"
-                    onChange={this.handleInputChangeG}
-                  />
-                </GooglePlacesSuggest>
-              )
-            }
-          />
-          Comment:{" "}
-          <input
-            type="text"
-            value={this.state.comment}
-            onChange={e => {
-              this.handleInputChange("comment", e);
-            }}
-          />{" "}
-          <br />
-          Date:{" "}
-          <input
-            type="date"
-            value={this.state.date}
-            onChange={e => {
-              this.handleInputChange("date", e);
-            }}
-          />{" "}
-          <br />
-          <button onClick={e => this.handleClick(e)}>Create activity</button>
-        </form>
+      <div className="form">
+        <h2>
+          <img src="/location.svg" className="Location-logo" alt="Location" />
+        </h2>
+        <Col lg={3}>
+          <Form>
+            <GoogleMapLoader
+              params={{
+                key: MY_API_KEY,
+                libraries: "places,geocode"
+              }}
+              render={googleMaps =>
+                googleMaps && (
+                  <GooglePlacesSuggest
+                    googleMaps={googleMaps}
+                    autocompletionRequest={{
+                      input: search
+                      // Optional options
+                      // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
+                    }}
+                    // Optional props
+                    onSelectSuggest={this.handleSelectSuggest}
+                    textNoResults="My custom no results text" // null or "" if you want to disable the no results item
+                    customRender={prediction => (
+                      <div className="customWrapper">
+                        {prediction
+                          ? prediction.description
+                          : "My custom no results text"}
+                      </div>
+                    )}
+                  >
+                    {/* Place:{" "} */}
+                    {/* <Col sm={3}> */}
+                    <Input
+                      valid
+                      type="text"
+                      value={value}
+                      placeholder="Search a location"
+                      onChange={this.handleInputChangeG}
+                    />
+                    {/* </Col> */}
+                  </GooglePlacesSuggest>
+                )
+              }
+            />
+            {/* Comment:{" "} */}
+            <Input
+              valid
+              type="text"
+              value={this.state.comment}
+              placeholder="Your comment"
+              onChange={e => {
+                this.handleInputChange("comment", e);
+              }}
+            />{" "}
+            {/* <br /> */}
+            {/* Date:{" "} */}
+            <Input
+              valid
+              type="date"
+              value={this.state.date}
+              onChange={e => {
+                this.handleInputChange("date", e);
+              }}
+            />{" "}
+            <br />
+            <button onClick={e => this.handleClick(e)}>
+              <img src="/tap.svg" className="Location-logo" alt="Location" />
+            </button>
+          </Form>
+        </Col>
       </div>
     );
   }

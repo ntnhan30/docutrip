@@ -38,7 +38,7 @@ class AddTrip extends Component {
   render() {
     return (
       <div className="AddTrip">
-        <h2>Add trip</h2>
+        <h2>Where's next ?</h2>
         <form>
           Name:{" "}
           <input

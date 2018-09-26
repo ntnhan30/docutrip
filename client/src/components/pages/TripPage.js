@@ -40,12 +40,8 @@ class TripPage extends Component {
   render() {
     return (
       <div>
-        <div>
-          {this.state.trip && this.state.trip.name}
-          <AddActivity
-            id={this.props.match.params.id}
-            onAddActivity={this.updateActivities}
-          />
+        <div className="tripName">
+          <h3>{this.state.trip && this.state.trip.name}</h3>
         </div>
         <AllActivities
           activities={this.state.activities}
@@ -53,6 +49,12 @@ class TripPage extends Component {
           onDeleteActivity={i => this.handleDelete(i)}
           sortByDate={e => this.sortByDateHandel(e)}
         />
+        <div>
+          <AddActivity
+            id={this.props.match.params.id}
+            onAddActivity={this.updateActivities}
+          />
+        </div>
       </div>
     );
   }

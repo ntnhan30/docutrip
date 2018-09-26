@@ -50,7 +50,7 @@ class Profile extends Component {
   render() {
     return (
       <div className="ProfileInfo">
-        <div className="Profile">
+        {/* <div className="Profile">
           <h1>My profile</h1>
           {this.state.username}
           <br />
@@ -66,10 +66,9 @@ class Profile extends Component {
           </form>
           <br />
           <br />
-        </div>
+        </div> */}
         <div className="trips">
           <AddTrip onAddTrip={e => this.handleAdd(e)} />
-          <h1>Trips</h1>
           <AllTrips
             trips={this.state.trips}
             onDeleteTrip={i => this.handleDelete(i)}

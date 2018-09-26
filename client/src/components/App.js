@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import api from "../api";
 import logo from "../logo.svg";
 import "./App.css";
+import "./style.scss";
 
 class App extends Component {
   // constructor(props) {
@@ -26,15 +27,22 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          {/* <Link to="/">Home</Link> */}
+          {/* <Link to="/">DocuTrip</Link> */}
           {/* {api.isLoggedIn() && <Link to="/add-trip">Add trip</Link>} */}
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
           {!api.isLoggedIn() && <Link to="/login">Login</Link>}
-          {api.isLoggedIn() && <Link to="/profile">Profile</Link>}
+          {api.isLoggedIn() && (
+            <Link to="/profile">
+              <img src="/book.svg" className="App-logo" alt="logo" />
+              <h3 style={{ fontFamily: "Dancing Script" }}>
+                {" "}
+                <h1>DocuTrip</h1>
+              </h3>
+            </Link>
+          )}
           {api.isLoggedIn() && (
             <Link to="/" onClick={e => this.handleLogoutClick(e)}>
-              Logout
+              <img src="/logout.svg" className="Location-logo" alt="Comment" />
             </Link>
           )}
         </header>
