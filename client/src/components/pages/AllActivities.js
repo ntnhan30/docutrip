@@ -56,7 +56,11 @@ class AllActivities extends Component {
             .map((a, i) => (
               <Col sm="6" md="3" key={i}>
                 <Card
-                  style={{ borderWidth: "1px", borderColor: "#02949f" }}
+                  style={{
+                    borderWidth: "1px",
+                    borderColor: "#02949f",
+                    margin: "3%"
+                  }}
                   className="card"
                 >
                   <CardTitle>

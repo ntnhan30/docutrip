@@ -44,12 +44,12 @@ class App extends Component {
               </Link>
             )}
           </div>
+          <div>{!api.isLoggedIn() && <Link to="/signup">Signup</Link>}</div>
+          <div>{!api.isLoggedIn() && <Link to="/login">Login</Link>}</div>
 
           <div className="logoutNav" className="center">
             {/* <Link to="/">DocuTrip</Link> */}
             {/* {api.isLoggedIn() && <Link to="/add-trip">Add trip</Link>} */}
-            {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
-            {!api.isLoggedIn() && <Link to="/login">Login</Link>}
 
             {api.isLoggedIn() && (
               <Link to="/" onClick={e => this.handleLogoutClick(e)}>
