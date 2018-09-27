@@ -27,24 +27,40 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          {/* <Link to="/">DocuTrip</Link> */}
-          {/* {api.isLoggedIn() && <Link to="/add-trip">Add trip</Link>} */}
-          {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
-          {!api.isLoggedIn() && <Link to="/login">Login</Link>}
-          {api.isLoggedIn() && (
-            <Link to="/profile">
-              <img src="/book.svg" className="App-logo" alt="logo" />
-              <h3 style={{ fontFamily: "Dancing Script" }}>
-                {" "}
-                <h1>DocuTrip</h1>
-              </h3>
-            </Link>
-          )}
-          {api.isLoggedIn() && (
-            <Link to="/" onClick={e => this.handleLogoutClick(e)}>
-              <img src="/logout.svg" className="Location-logo" alt="Comment" />
-            </Link>
-          )}
+          <div className="logoNav" className="center">
+            {api.isLoggedIn() && (
+              <Link to="/profile">
+                <img src="/notebook.svg" className="App-logo" alt="logo" />
+                <h3
+                  style={{
+                    fontFamily: "Dancing Script",
+                    display: "inline",
+                    color: "white"
+                  }}
+                >
+                  {" "}
+                  DocuTrip
+                </h3>
+              </Link>
+            )}
+          </div>
+
+          <div className="logoutNav" className="center">
+            {/* <Link to="/">DocuTrip</Link> */}
+            {/* {api.isLoggedIn() && <Link to="/add-trip">Add trip</Link>} */}
+            {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
+            {!api.isLoggedIn() && <Link to="/login">Login</Link>}
+
+            {api.isLoggedIn() && (
+              <Link to="/" onClick={e => this.handleLogoutClick(e)}>
+                <img
+                  src="/logout.svg"
+                  className="Location-logo"
+                  alt="Comment"
+                />
+              </Link>
+            )}
+          </div>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -55,6 +71,16 @@ class App extends Component {
           <Route path="/profile" component={Profile} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
+        <div className="App-footer">
+          <h1
+            style={{
+              fontFamily: "Dancing Script",
+              color: "white"
+            }}
+          >
+            Keep collecting memories
+          </h1>
+        </div>
       </div>
     );
   }

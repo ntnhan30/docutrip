@@ -41,7 +41,9 @@ class TripPage extends Component {
     return (
       <div>
         <div className="tripName">
-          <h3>{this.state.trip && this.state.trip.name}</h3>
+          <h1>{this.state.trip && this.state.trip.name}</h1>
+          <div className="greenLine" />
+          <div className="green" />
         </div>
         <AllActivities
           activities={this.state.activities}

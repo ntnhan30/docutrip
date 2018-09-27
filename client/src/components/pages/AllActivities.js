@@ -59,23 +59,26 @@ class AllActivities extends Component {
                   style={{ borderWidth: "1px", borderColor: "#87EFC3" }}
                   className="card"
                 >
-                  <CardTitle>{a.name}</CardTitle>
-                  <CardSubtitle>
-                    <img src={a.icon} alt="" />
-                  </CardSubtitle>
+                  <CardTitle>
+                    <img src={a.icon} className="Star-logo" alt="" /> {a.name}
+                  </CardTitle>
                   {/* <CardSubtitle>
                     Date: {a.date.toString().substring(0, 10)}
                   </CardSubtitle> */}
                   <CardImg
+                    style={{ objectFit: "cover" }}
                     top
                     width="100%"
+                    height="150px"
                     src={a.photoUrl}
                     alt="Card image cap"
                   />
                   <CardBody>
                     <CardText>
-                      <small className="text-muted">{a.rating}</small>
                       <img src="/star.svg" className="Star-logo" alt="" />
+                      <small className="text-muted" className="Star-logo">
+                        {a.rating}
+                      </small>
                     </CardText>
                     <CardLink href={a.website} target="_blank">
                       <img

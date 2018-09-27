@@ -26,7 +26,9 @@ class AllTrips extends Component {
             <div>
               <div key={i} className="trip">
                 <Link to={"/trip/" + t._id} key={t._id}>
-                  {t.name}
+                  <h5 style={{ fontFamily: "Dancing Script", color: "black" }}>
+                    {t.name}
+                  </h5>
                 </Link>
               </div>
               <div className="tripDelete">

@@ -12,10 +12,11 @@ class ActivitiesByDate extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ padding: "2%" }}>
         <form action="">
           {" "}
-          <img src="/calendar.svg" className="Star-logo" alt="" />
+          Sort by date{" "}
+          {/* <img src="/calendar.svg" className="Star-logo" alt="" /> */}
           <select name="date" onChange={e => this.handleChange(e)}>
             <option value="">All</option>
             {this.props.activities

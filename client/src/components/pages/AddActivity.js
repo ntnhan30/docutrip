@@ -73,9 +73,6 @@ class AddActivity extends Component {
     const { search, value } = this.state;
     return (
       <div className="form">
-        <h2>
-          <img src="/location.svg" className="Location-logo" alt="Location" />
-        </h2>
         <Col lg={3}>
           <Form>
             <GoogleMapLoader
@@ -139,7 +136,7 @@ class AddActivity extends Component {
             />{" "}
             <br />
             <button onClick={e => this.handleClick(e)}>
-              <img src="/tap.svg" className="Location-logo" alt="Location" />
+              <img src="/tap.svg" className="Location-logo" alt="Tap" />
             </button>
           </Form>
         </Col>

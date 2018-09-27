@@ -40,7 +40,7 @@ class AddTrip extends Component {
       <div className="AddTrip">
         <h2>Where's next ?</h2>
         <form>
-          Name:{" "}
+          {/* Name:{" "} */}
           <input
             type="text"
             value={this.state.name}
@@ -48,7 +48,9 @@ class AddTrip extends Component {
               this.handleInputChange("name", e);
             }}
           />{" "}
-          <button onClick={e => this.handleClick(e)}>Create trip</button>
+          <button onClick={e => this.handleClick(e)}>
+            <img src="/tap.svg" className="Location-logo" alt="Tap" />
+          </button>
         </form>
       </div>
     );

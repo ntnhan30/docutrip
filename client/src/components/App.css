@@ -15,17 +15,28 @@
 }
 
 .Location-logo {
-  height: 40px;
+  height: 30px;
 }
 
 .Star-logo {
-  height: 25px;
+  height: 18px;
 }
 
 .App-header {
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
   padding: 20px;
   color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -58,11 +69,10 @@
 }
 
 .trip {
-  -webkit-animation: roll-in-left .6s ease-out both;
-  animation: roll-in-left .6s ease-out both;
+  animation: swing-in-top-fwd .5s cubic-bezier(.175, .885, .32, 1.275) both;
   height: 150px;
   width: 150px;
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
   border-radius: 50%;
   margin: 0.5%;
   /* display: inline-block; */
@@ -73,11 +83,13 @@
 }
 
 .trip:hover {
-  animation: heartbeat 1.5s ease-in-out infinite both
+  -webkit-animation: wobble-hor-bottom 0.8s both;
+  animation: wobble-hor-bottom 0.8s both;
 }
 
 .card:hover {
-  animation: heartbeat 1.5s ease-in-out infinite both
+  -webkit-animation: wobble-hor-bottom 0.8s both;
+  animation: wobble-hor-bottom 0.8s both;
 }
 
 .tripName {
@@ -86,13 +98,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px rgb(4, 148, 159) solid;
+  /* border: 1px rgb(4, 148, 159) solid; */
+  font-family: Dancing Script;
+  padding: 2%
+}
+
+.greenLine {
+  height: 15px;
+  width: 110%;
+  border-top: 1px rgb(4, 148, 159) solid;
+
+}
+
+.green {
+  height: 15px;
+  width: 110%;
+  background-color: rgb(4, 148, 159);
 }
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 2%
+}
+
+.App-footer {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 
@@ -120,44 +157,88 @@
   }
 }
 
-@keyframes roll-in-left {
+@keyframes swing-in-top-fwd {
   0% {
-    -webkit-transform: translateX(-800px) rotate(-540deg);
-    transform: translateX(-800px) rotate(-540deg);
+    transform: rotateX(-100deg);
+    transform-origin: top;
     opacity: 0
   }
 
   100% {
-    -webkit-transform: translateX(0) rotate(0deg);
-    transform: translateX(0) rotate(0deg);
+    transform: rotateX(0deg);
+    transform-origin: top;
     opacity: 1
   }
 }
 
-@keyframes heartbeat {
-  from {
-    transform: scale(1);
-    transform-origin: center center;
-    animation-timing-function: ease-out
+@-webkit-keyframes wobble-hor-bottom {
+
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%
   }
 
-  10% {
-    transform: scale(.91);
-    animation-timing-function: ease-in
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+    transform: translateX(-30px) rotate(-6deg)
   }
 
-  17% {
-    transform: scale(.98);
-    animation-timing-function: ease-out
-  }
-
-  33% {
-    transform: scale(.87);
-    animation-timing-function: ease-in
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+    transform: translateX(15px) rotate(6deg)
   }
 
   45% {
-    transform: scale(1);
-    animation-timing-function: ease-out
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+    transform: translateX(-15px) rotate(-3.6deg)
+  }
+
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+    transform: translateX(9px) rotate(2.4deg)
+  }
+
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+    transform: translateX(-6px) rotate(-1.2deg)
+  }
+}
+
+@keyframes wobble-hor-bottom {
+
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%
+  }
+
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+    transform: translateX(-30px) rotate(-6deg)
+  }
+
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+    transform: translateX(15px) rotate(6deg)
+  }
+
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+    transform: translateX(-15px) rotate(-3.6deg)
+  }
+
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+    transform: translateX(9px) rotate(2.4deg)
+  }
+
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+    transform: translateX(-6px) rotate(-1.2deg)
   }
 }
