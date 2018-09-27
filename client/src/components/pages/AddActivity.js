@@ -5,8 +5,10 @@ import GooglePlacesSuggest from "react-google-places-suggest";
 import { Input, Col, FormGroup, Form } from "reactstrap";
 
 // Try to put it in .env file
-const MY_API_KEY = "AIzaSyCUUD_nI-yWZrq9Df4H3f9x3kbrDUAclLo";
-// const MY_API_KEY = process.env.API_KEY;
+// const MY_API_KEY_MAPS = "AIzaSyCUUD_nI-yWZrq9Df4H3f9x3kbrDUAclLo";
+let REACT_APP_API_KEY_MAPS = process.env.REACT_APP_API_KEY_MAPS;
+
+console.log(process.env.REACT_APP_API_KEY_MAPS);
 
 class AddActivity extends Component {
   constructor(props) {
@@ -74,10 +76,11 @@ class AddActivity extends Component {
     return (
       <div className="form">
         <Col lg={3}>
+          <h6>Where have you been ?</h6>
           <Form>
             <GoogleMapLoader
               params={{
-                key: MY_API_KEY,
+                key: REACT_APP_API_KEY_MAPS,
                 libraries: "places,geocode"
               }}
               render={googleMaps =>
