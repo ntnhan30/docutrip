@@ -1,4 +1,4 @@
-# MERN boilerplate | Ironhack Fullstack Application
+# MERN Project | Docutrip Fullstack Application
 
 ## Global information
 
@@ -39,13 +39,9 @@ MONGODB_URI=......
 
 ## Commands
 
-**To download the boilerplate and link it with your GitHub project**
+**To download the Docutrip**
 
-(replace `<my-project>` and `<https://github.com/user/my-project.git>` by what you want, without `<` and `>`).
-
-```sh
-# Clone the project with only the last commit and save it in the folder <my-project>
-$ git clone --depth=1 https://github.com/mc100s/mern-boilerplate.git <my-project>
+$ git clone 
 
 $ cd <my-project>
 $ rm -rf .git
